@@ -4,6 +4,7 @@
 
 **1. Introduction to Tertiary Genomic Analysis and VCF Data**
 
+*   1.0.  Genetic Variants
 *   1.1.  The Genomic Analysis Pipeline: Primary, Secondary, and Tertiary
 *   1.2.  VCF (Variant Call Format): Structure and Key Information
     *   1.2.1  Header Section: Metadata and Definitions
