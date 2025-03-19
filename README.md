@@ -12,6 +12,7 @@
 *   1.3.  Challenges in Tertiary Analysis: Scale, Complexity, and Speed
 *   1.4  Why a Specialized Database is Crucial for Tertiary Analysis
 *   1.5  Introduction to the VAST database capabilities.
+*   1.6  Hands-on VCF Exploration: CLI Tools and Python
 
 **2. VAST DB: Architecture and Key Features for Genomic Analysis**
 
