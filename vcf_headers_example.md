@@ -1,3 +1,7 @@
+# VCF Exploration
+
+## View Headers
+
 ```
 bcftools view -h ALL.chr22.phase3_shapeit2_mvncall_integrated_v5b.20130502.genotypes.vcf.gz
 ```
@@ -79,4 +83,30 @@ liststr = "#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT HG00096	HG00097	HG00099
 l = liststr.split("\t")
 print(len(l))
 # 2512
+```
+
+## View some data
+
+```
+bcftools view ALL.chr22.phase3_shapeit2_mvncall_integrated_v5b.20130502.genotypes.vcf.gz | grep -E "^#CHROM|^[^#]" | head -n 2
+```
+
+Outputs:
+
+```
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	HG00096	HG00097	HG00099 ...
+22	16050075	.	A	G	100	PASS	AC=1;AF=0.000199681;AN=5008;NS=2504;DP=8012;EAS_AF=0;AMR_AF=0;AFR_AF=0;EUR_AF=0;SAS_AF=0.001;AA=.|||;VT=SNP	GT	0|0	0|0	0|0 ...
+```
+
+## View specific columns
+
+```
+bcftools view -H -v snps ALL.chr22.phase3_shapeit2_mvncall_integrated_v5b.20130502.genotypes.vcf.gz | head -n 2 | cut -f 1-12
+```
+
+Outputs:
+
+```
+22	16050075	.	A	G	100	PASS	AC=1;AF=0.000199681;AN=5008;NS=2504;DP=8012;EAS_AF=0;AMR_AF=0;AFR_AF=0;EUR_AF=0;SAS_AF=0.001;AA=.|||;VT=SNP	GT	0|0	0|0	0|0
+22	16050115	.	G	A	100	PASS	AC=32;AF=0.00638978;AN=5008;NS=2504;DP=11468;EAS_AF=0;AMR_AF=0.0014;AFR_AF=0.0234;EUR_AF=0;SAS_AF=0;AA=.|||;VT=SNP	GT	0|0	0|0	0|0
 ```
