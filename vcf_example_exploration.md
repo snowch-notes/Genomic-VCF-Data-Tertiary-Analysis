@@ -110,3 +110,56 @@ Outputs:
 22	16050075	.	A	G	100	PASS	AC=1;AF=0.000199681;AN=5008;NS=2504;DP=8012;EAS_AF=0;AMR_AF=0;AFR_AF=0;EUR_AF=0;SAS_AF=0.001;AA=.|||;VT=SNP	GT	0|0	0|0	0|0
 22	16050115	.	G	A	100	PASS	AC=32;AF=0.00638978;AN=5008;NS=2504;DP=11468;EAS_AF=0;AMR_AF=0.0014;AFR_AF=0.0234;EUR_AF=0;SAS_AF=0;AA=.|||;VT=SNP	GT	0|0	0|0	0|0
 ```
+
+## Description
+
+Let's break down the first data record from the output of `bcftools view -H -v snps ... | head -n 2 | cut -f 1-12`:
+
+```
+22	16050075	.	A	G	100	PASS	AC=1;AF=0.000199681;AN=5008;NS=2504;DP=8012;EAS_AF=0;AMR_AF=0;AFR_AF=0;EUR_AF=0;SAS_AF=0.001;AA=.|||;VT=SNP	GT	0|0	0|0	0|0
+```
+
+**Column-by-Column Explanation:**
+
+1.  **`22` (CHROM):**
+    * This indicates the variant is located on chromosome 22.
+2.  **`16050075` (POS):**
+    * This is the position of the variant on chromosome 22, specifically at base position 16,050,075.
+3.  **`.` (ID):**
+    * This is an identifier for the variant. In this case, it's a dot (`.`), meaning no specific ID (like an rsID) is available.
+4.  **`A` (REF):**
+    * This is the reference allele. It means that the reference genome has an "A" (adenine) at this position.
+5.  **`G` (ALT):**
+    * This is the alternate allele. It means that at least one sample in the dataset has a "G" (guanine) at this position instead of an "A".
+6.  **`100` (QUAL):**
+    * This is the Phred-scaled quality score, indicating the confidence in the variant call. A higher score means higher confidence. 100 is a relatively high score.
+7.  **`PASS` (FILTER):**
+    * This indicates that the variant passed all filters.
+8.  **`AC=1;AF=0.000199681;AN=5008;NS=2504;DP=8012;EAS_AF=0;AMR_AF=0;AFR_AF=0;EUR_AF=0;SAS_AF=0.001;AA=.|||;VT=SNP` (INFO):**
+    * This is a semicolon-separated list of variant information:
+        * `AC=1`: Allele count (1 alternate allele observed).
+        * `AF=0.000199681`: Allele frequency (approximately 0.0002).
+        * `AN=5008`: Total number of alleles in the dataset.
+        * `NS=2504`: Number of samples with data.
+        * `DP=8012`: Total read depth at this position.
+        * `EAS_AF=0`, `AMR_AF=0`, `AFR_AF=0`, `EUR_AF=0`, `SAS_AF=0.001`: Allele frequencies in different populations (East Asian, Admixed American, African, European, South Asian).
+        * `AA=.|||`: Ancestral allele information (unavailable).
+        * `VT=SNP`: Variant type (single nucleotide polymorphism).
+9.  **`GT` (FORMAT):**
+    * This indicates that the genotype information is provided in the following columns.
+10. **`0|0` (HG00096, HG00097, HG00099):**
+    * These columns represent the genotypes for samples HG00096, HG00097, and HG00099 respectively.
+    * `0|0` means the sample is homozygous for the reference allele.
+        * The `0` refers to the reference allele.
+        * The `|` indicates that the genotype is phased. Phasing means that the alleles are assigned to specific chromosomes.
+        * If the `|` was a `/` it would mean the genotype is unphased.
+    * **Genotype Interpretations:**
+        * `0|0` or `0/0`: Homozygous reference (two copies of the reference allele).
+        * `0|1` or `0/1`: Heterozygous (one copy of the reference allele, one copy of the alternate allele).
+        * `1|0` or `1/0`: Heterozygous (same as above, but phased differently).
+        * `1|1` or `1/1`: Homozygous alternate (two copies of the alternate allele).
+
+**In Summary:**
+
+The first record describes a SNP at position 16,050,075 on chromosome 22, where an "A" is replaced by a "G" in at least one sample. This variant is rare in the 1000 Genomes dataset. The first three samples, HG00096, HG00097, and HG00099, are all homozygous for the reference allele (A/A).
+
