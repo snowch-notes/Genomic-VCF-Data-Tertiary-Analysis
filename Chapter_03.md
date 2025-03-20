@@ -1,5 +1,3 @@
-You are absolutely correct! My apologies, the response was truncated. It seems there's a limit to the response length. Here's the complete, corrected, and final version of Section 3, including the crucial projection definitions and a concluding remark:
-
 **3. Designing a VAST DB Schema for VCF Data**
 
 This section outlines how to structure your VCF data within VAST DB for optimal performance and flexibility in tertiary analysis. We'll cover data modeling considerations, a recommended multi-table schema, data type mapping, handling complex fields, indexing, and the concept of projections in VAST DB.
@@ -198,8 +196,8 @@ This creates the `variants` table and its associated schema, defining the data t
         ('gt', pa.string()),
         ('gq', pa.int32()),
         ('dp', pa.int32()),
-        ('ad', pa.string()),  # Added AD
-        ('pl', pa.string()),  # Added PL
+        ('ad', pa.string()),
+        ('pl', pa.string()),
         ('sb', pa.string())
     ])
     genotypes_table = bucket.create_schema("genotypes_schema").create_table("genotypes", genotypes_schema)
@@ -211,7 +209,7 @@ This creates the `variants` table and its associated schema, defining the data t
         unsorted_columns=['gt', 'gq', 'dp', 'ad', 'pl', 'sb']
     )
 ```
-This defines the `genotypes` table and its schema, including the added `ad`, `pl` and `sb` fields. A projection, `genotypes_sample_projection`, is created, sorting by `chrom`, `pos`, and `sample_id` to optimize queries that filter by these fields. The common genotype fields (`gt`, `gq`, `dp`, `ad`, `pl`, `sb`) are included as *unsorted* columns in the projection, making them readily available without needing a separate lookup.
+This defines the `genotypes` table and its schema. A projection, `genotypes_sample_projection`, is created, sorting by `chrom`, `pos`, and `sample_id` to optimize queries that filter by these fields. The common genotype fields (`gt`, `gq`, `dp`, `ad`, `pl`, `sb`) are included as *unsorted* columns in the projection, making them readily available without needing a separate lookup.
 
 **Part 4: Annotations Table**
 
