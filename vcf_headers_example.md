@@ -71,3 +71,12 @@ Outputs (truncated for brevity):
 ##bcftools_viewCommand=view -h ALL.chr22.phase3_shapeit2_mvncall_integrated_v5b.20130502.genotypes.vcf.gz; Date=Thu Mar 20 13:31:10 2025
 #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	HG00096	HG00097	HG00099	HG00100	HG00101	HG00102	...
 ```
+
+The last lines has 2512 items.  Therefore, the VCF file has 2512 columns of data.
+
+```
+liststr = "#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT HG00096	HG00097	HG00099	... "
+l = liststr.split("\t")
+print(len(l))
+# 2512
+```
