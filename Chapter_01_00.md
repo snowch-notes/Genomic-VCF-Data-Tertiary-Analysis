@@ -1,5 +1,7 @@
 # Genetic Variants
 
+See also: https://www.ebi.ac.uk/training/online/courses/human-genetic-variation-introduction/
+
 Genetic variants are differences in the DNA sequence among individuals. These differences can affect how individuals look, how their bodies function, and their susceptibility to diseases.
 
 ## Types of Genetic Variants
